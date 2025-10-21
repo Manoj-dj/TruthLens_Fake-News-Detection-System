@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TruthLens - AI-Powered Fake News Detection with Explainability">
+    <title>TruthLens | AI Fake News Detector</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 10 L20 20 L26 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="20" cy="20" r="3" fill="currentColor"/>
+                    </svg>
+                    <h1 class="logo-text">TruthLens</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge">🤖 AI-Powered</span>
+                    <span class="badge">🎯 99.3% Accurate</span>
+                    <span class="badge">🔍 Explainable AI</span>
+                </div>
+                <h2 class="hero-title">
+                    Detect Fake News with
+                    <span class="gradient-text">AI Intelligence</span>
+                </h2>
+                <p class="hero-subtitle">
+                    Advanced machine learning model with explainable AI to help you identify misinformation. 
+                    Get instant analysis backed by natural language explanations.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Detection Form -->
+    <main class="main">
+        <div class="container">
+            <div class="detection-card">
+                <div class="card-header">
+                    <h3 class="card-title">Analyze News Article</h3>
+                    <p class="card-subtitle">Enter the title and content below to check for misinformation</p>
+                </div>
+
+                <form id="detectionForm" class="detection-form">
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="newsTitle" class="form-label">
+                            <span>Article Title</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="newsTitle" 
+                            name="title"
+                            class="form-input" 
+                            placeholder="e.g., Scientists Discover New Treatment..."
+                            minlength="5"
+                            maxlength="500"
+                            required
+                        >
+                        <span class="form-hint">5-500 characters</span>
+                    </div>
+
+                    <!-- Text Input -->
+                    <div class="form-group">
+                        <label for="newsText" class="form-label">
+                            <span>Article Content</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <textarea 
+                            id="newsText" 
+                            name="text"
+                            class="form-textarea" 
+                            rows="8"
+                            placeholder="Paste the full article content here..."
+                            minlength="20"
+                            maxlength="10000"
+                            required
+                        ></textarea>
+                        <div class="form-footer">
+                            <span class="form-hint">20-10,000 characters</span>
+                            <span id="charCount" class="char-count">0 / 10,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary" id="analyzeBtn">
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">Analyze Article</span>
+                    </button>
+
+                    <!-- Sample Articles -->
+                    <div class="sample-section">
+                        <p class="sample-label">Try a sample:</p>
+                        <div class="sample-buttons">
+                            <button type="button" class="btn-sample" data-sample="fake">Fake News Example</button>
+                            <button type="button" class="btn-sample" data-sample="real">Real News Example</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-state hidden">
+                    <div class="loading-spinner"></div>
+                    <h4 class="loading-title">Analyzing Article...</h4>
+                    <p class="loading-subtitle" id="loadingStep">Step 1: Running AI model prediction</p>
+                    <div class="loading-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p class="loading-time">This may take 1-2 minutes</p>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section hidden">
+                    <!-- Result Header -->
+                    <div class="result-header">
+                        <div class="result-badge" id="resultBadge">
+                            <span class="badge-icon" id="badgeIcon">⚠️</span>
+                            <span class="badge-text" id="badgeText">Fake News Detected</span>
+                        </div>
+                        <div class="result-confidence">
+                            <span class="confidence-label">Confidence</span>
+                            <span class="confidence-value" id="confidenceValue">99.8%</span>
+                        </div>
+                    </div>
+
+                    <!-- Probability Bars -->
+                    <div class="probability-section">
+                        <div class="probability-item">
+                            <div class="probability-header">
+                                <span class="probability-label">❌ Fake Probability</span>
+                                <span class="probability-value" id="fakeProbValue">99.8%</span>
+                            </div>
+                            <div class="probability-bar">
+                                <div class="probability-fill fake-fill" id="fakeProbBar" style="width: 99.8%"></div>
+                            </div>
+                        </div>
+                        <div class="probability-item">
+                            <div class="probability-header">
+                                <span class="probability-label">✅ Real Probability</span>
+                                <span class="probability-value" id="realProbValue">0.2%</span>
+                            </div>
+                            <div class="probability-bar">
+                                <div class="probability-fill real-fill" id="realProbBar" style="width: 0.2%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Explanation -->
+                    <div class="explanation-section">
+                        <h4 class="section-title">
+                            <span class="title-icon">💡</span>
+                            AI Explanation
+                        </h4>
+                        <div class="explanation-card">
+                            <p class="explanation-text" id="explanationText">
+                                <!-- AI explanation will be inserted here -->
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Word Highlights -->
+                    <div class="highlights-section">
+                        <h4 class="section-title">
+                            <span class="title-icon">🔍</span>
+                            Key Word Analysis
+                        </h4>
+                        <div class="highlights-tabs">
+                            <button class="tab-btn active" data-tab="all">All Words</button>
+                            <button class="tab-btn" data-tab="fake">Fake Indicators</button>
+                            <button class="tab-btn" data-tab="real">Real Indicators</button>
+                        </div>
+                        <div class="highlights-grid" id="highlightsGrid">
+                            <!-- Word highlights will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Metadata -->
+                    <div class="metadata-section">
+                        <div class="metadata-item">
+                            <span class="metadata-label">Analysis Time</span>
+                            <span class="metadata-value" id="processingTime">2.3s</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Request ID</span>
+                            <span class="metadata-value" id="requestId">uuid-here</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Timestamp</span>
+                            <span class="metadata-value" id="timestamp">2025-10-21 12:30:45</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="result-actions">
+                        <button class="btn-secondary" id="analyzeAnotherBtn">
+                            <span>🔄</span>
+                            Analyze Another Article
+                        </button>
+                        <button class="btn-outline" id="shareBtn">
+                            <span>📤</span>
+                            Share Result
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" class="error-state hidden">
+                    <div class="error-icon">⚠️</div>
+                    <h4 class="error-title">Analysis Failed</h4>
+                    <p class="error-message" id="errorMessage">
+                        Something went wrong. Please try again.
+                    </p>
+                    <button class="btn-secondary" id="retryBtn">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p class="footer-text">© 2025 TruthLens. Powered by AI & Machine Learning.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Config (must load first) -->
+    <script src="./config.js"></script>
+
+    <!-- Scripts (load in order) -->
+    <script src="./js/api.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+
+</body>
+</html>

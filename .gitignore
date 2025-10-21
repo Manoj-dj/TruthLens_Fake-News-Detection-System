@@ -1,0 +1,60 @@
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Logs
+logs/
+*.log
+truthlens.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Model Files (too large for git)
+Model-Trained/
+*.safetensors
+*.bin
+*.pth
+*.h5
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Cache
+.cache/
+*.cache
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+.pytest_cache/
+
+
+backend/.env
+backend/.env.example
+backend/README.md
