@@ -1,46 +1,32 @@
 # Core Framework
-
 fastapi>=0.104,<1.0
 uvicorn[standard]>=0.24,<0.26
 python-multipart>=0.0.6,<0.1
 
-
 # ML & NLP
-
-torch>=2.1,<2.3
+torch==2.1.0+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
 transformers>=4.35,<4.38
 shap>=0.43,<0.46
 
-
 # AWS Services
-
 boto3>=1.29,<1.35
 botocore>=1.32,<1.35
 
-
 # LLM Integration
-
 google-generativeai>=0.3,<0.5
 
-
 # Utilities
-
 python-dotenv>=1.0,<2.0
 pydantic>=2.5,<2.7
 pydantic-settings>=2.1,<2.3
 
-
 # Logging & Monitoring
-
 python-json-logger>=2.0,<3.0
 
-
 # Data Processing
-
 numpy>=1.24,<1.27
 pandas>=2.0,<2.3
 
-
 # HTTP & CORS
-
 httpx>=0.25,<0.28
