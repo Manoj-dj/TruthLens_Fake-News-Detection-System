@@ -5,7 +5,7 @@
 
 const CONFIG = {
     // API Configuration
-    API_BASE_URL: 'http://localhost:8000',  // Backend URL
+    API_BASE_URL: 'http://15.207.92.18:8000',  // Your EC2 Elastic IP
     API_ENDPOINTS: {
         DETECT: '/api/detect',
         HEALTH: '/api/health',
@@ -49,3 +49,4 @@ const CONFIG = {
 
 // Freeze config to prevent modifications
 Object.freeze(CONFIG);
+
